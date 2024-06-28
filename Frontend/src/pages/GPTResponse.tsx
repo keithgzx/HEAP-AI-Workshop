@@ -33,9 +33,14 @@ const GPTResponse: React.FC = () => {
 
   const fetchRecipe = async (dishName: string) => {
     try {
-      const response = await fetch('GPT_ENDPOINT', {
+      const response = await fetch('http://localhost:8000/v1/gpt/generate', {
         // 1. Call GPT API endpoint asynchronously sing POST + headers configuration as Content-Type': 'application/json' + { dish: dishName } as body 
         // TODO
+        method: 'POST',
+        headers: {
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify({dish: dishName})
       });
       if (response.ok) {
         // 2. If response is ok, await for data and then setRecipe

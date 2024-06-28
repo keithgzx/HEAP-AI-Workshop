@@ -11,12 +11,20 @@ gpt4all_kwargs = {'allow_download': 'True'}
 def createVectorDB(urls: list, chunkSize: int, chunkOverlap: int, apiKey: str):
     # Scrape through specified URLs    
     #TODO
+    docs = [FireCrawlLoader(api_key=apiKey, url=url, mode="scrape")]
 
     # Split documentss 
     #TODO
+    TEXTSPLITTER = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+        chunk_size=chunkSize,
+        chunk_overlap=chunkOverlap
+    )
+    docs_split_by_chunks = TEXTSPLITTER.split_documents(docs_list)
 
     # Split documents by chunks
     #TODO
+    docs_filtered=[]
+    for dov in docs_split_by_chunks:
 
     # Filter out complex metadata and ensure proper document formatting
     #TODO
